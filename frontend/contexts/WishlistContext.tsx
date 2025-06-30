@@ -40,7 +40,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
-      const { data } = await axios.get('http://localhost:5000/api/wishlist', {
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/wishlist`, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const addToWishlist = async (productId: string) => {
     try {
       const { data } = await axios.post(
-        'http://localhost:5000/api/wishlist', 
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/wishlist`, 
         { productId },
         {
           withCredentials: true,
@@ -79,7 +79,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
 
   const removeFromWishlist = async (productId: string) => {
     try {
-      await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/wishlist/${productId}`, {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',

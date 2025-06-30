@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // Proxy to backend API to fetch users, optionally filtered by role
 export async function GET(req: NextRequest) {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   // Get query params from request (e.g. /api/users?role=buyer)
   const { searchParams } = new URL(req.url);

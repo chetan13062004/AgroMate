@@ -27,7 +27,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [total, setTotal] = useState(0)
 
   // Fetch current cart from server
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   const buildHeaders = (extra: Record<string, string> = {}): HeadersInit => {
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null

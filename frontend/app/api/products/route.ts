@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 // Proxy to backend API to fetch active products
 export async function GET() {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+  const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
   try {
     const response = await fetch(`${backendUrl}/api/products`, {

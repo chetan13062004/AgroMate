@@ -129,7 +129,7 @@ export default function AdminProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
         const res = await fetch(`${apiBase}/api/products/all`, { 
           credentials: 'include',
           headers: {
@@ -151,7 +151,7 @@ export default function AdminProductsPage() {
   // Fetch detailed product information
   const fetchProductDetails = async (productId: string) => {
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const res = await fetch(`${apiBase}/api/products/admin/${productId}`, { 
         credentials: 'include',
         headers: {
@@ -172,7 +172,7 @@ export default function AdminProductsPage() {
   // Handle product approval
   const handleApproveProduct = async (productId: string) => {
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const res = await fetch(`${apiBase}/api/products/${productId}/approve`, {
         method: 'PATCH',
         credentials: 'include',
@@ -202,7 +202,7 @@ export default function AdminProductsPage() {
     if (!reason) return;
 
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const res = await fetch(`${apiBase}/api/products/${productId}/reject`, {
         method: 'PATCH',
         credentials: 'include',
@@ -274,7 +274,7 @@ export default function AdminProductsPage() {
   // Toggle product status (active/inactive)
   const handleToggleStatus = async (productId: string) => {
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const res = await fetch(`${apiBase}/api/products/${productId}/toggle-status`, {
         method: 'PATCH',
         credentials: 'include',

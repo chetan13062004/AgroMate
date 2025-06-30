@@ -30,14 +30,13 @@ export default function NewProfile() {
   }, [user])
 
   const handleSave = async () => {
-    if (!user) return
-    
+    if (!user) return;
     try {
-      const response = await fetch('http://localhost:5000/api/users/me', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/users/me`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
         },
         body: JSON.stringify({
           name: formData.name,
@@ -48,7 +47,7 @@ export default function NewProfile() {
             lng: user.location?.lng || 0
           }
         })
-      })
+      });
 
       if (!response.ok) {
         throw new Error('Failed to update profile')

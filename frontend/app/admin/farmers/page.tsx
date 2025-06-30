@@ -134,7 +134,7 @@ export default function AdminFarmersPage() {
     // Optimistic UI update – remove farmer immediately
     setFarmers((prev) => prev.filter((farmer) => farmer.id !== farmerId))
 
-    const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:5000"
+    const backendBase = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000"
     const endpoint = `${backendBase}/api/farmers/${farmerId}`
 
     try {
@@ -151,7 +151,7 @@ export default function AdminFarmersPage() {
     const fetchFarmersAndProducts = async () => {
       try {
         // First, fetch all farmers
-        const farmersRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:5000"}/api/farmers`, {
+        const farmersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000"}/api/farmers`, {
           credentials: "include",
         });
         
@@ -163,7 +163,7 @@ export default function AdminFarmersPage() {
         const rawFarmers = Array.isArray(farmersData?.data?.farmers) ? farmersData.data.farmers : [];
         
         // Then, fetch all products to get categories
-        const productsRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:5000"}/api/products/all`, {
+        const productsRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000"}/api/products/all`, {
           credentials: "include",
         });
         
@@ -277,7 +277,7 @@ export default function AdminFarmersPage() {
 
     // Hit the dedicated endpoints so the backend can trigger the appropriate
     // email (approve ➜ /approve, reject ➜ /reject)
-    const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:5000"
+    const backendBase = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000"
     const endpoint =
       action === "approve"
         ? `${backendBase}/api/farmers/${farmerId}/approve`
