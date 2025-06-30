@@ -68,6 +68,10 @@ app.use(cookieParser());
 
 
 // 2) ROUTES
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok', message: 'Backend is running!' });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/equipment', equipmentRoutes);
