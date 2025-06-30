@@ -68,7 +68,7 @@ app.use(cookieParser());
 
 
 // 2) ROUTES
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_: Request, res: Response) => {
   res.status(200).json({ status: 'ok', message: 'Backend is running!' });
 });
 
