@@ -81,7 +81,7 @@ export const getEquipment = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<Response | void> => {
   try {
     const eq = await Equipment.findById(req.params.id);
     if (!eq) return res.status(404).json({ status: 'error', message: 'Equipment not found' });
@@ -95,7 +95,7 @@ export const updateEquipment = async (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
-) => {
+): Promise<Response | void> => {
   try {
     const updates = { ...req.body };
     if (req.files && Array.isArray(req.files)) {
@@ -118,7 +118,7 @@ export const deleteEquipment = async (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
-) => {
+): Promise<Response | void> => {
   try {
     const deleted = await Equipment.findOneAndDelete({ _id: req.params.id, owner: req.user!._id });
     if (!deleted) return res.status(404).json({ status: 'error', message: 'Equipment not found' });
@@ -133,7 +133,7 @@ export const deleteEquipment = async (
  * Criteria: current date lies within availability window.
  */
 export const getAvailableEquipment = async (
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction
 ) => {

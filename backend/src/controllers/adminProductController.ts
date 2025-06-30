@@ -6,7 +6,7 @@ import { Types } from 'mongoose';
 // @desc    Get all products (admin only) with filtering and pagination
 // @route   GET /api/products/all
 // @access  Private/Admin
-export const getAllProducts = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const getAllProducts = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const { status, category, search, page = 1, limit = 10 } = req.query;
     const query: any = {};
@@ -59,7 +59,7 @@ export const getAllProducts = async (req: AuthenticatedRequest, res: Response): 
 // @desc    Get single product details (admin only)
 // @route   GET /api/products/admin/:id
 // @access  Private/Admin
-export const getProductDetails = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const getProductDetails = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const { id } = req.params;
     
@@ -97,7 +97,7 @@ export const getProductDetails = async (req: AuthenticatedRequest, res: Response
 // @desc    Approve a product (admin only)
 // @route   PATCH /api/products/:id/approve
 // @access  Private/Admin
-export const approveProduct = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const approveProduct = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const product = await Product.findByIdAndUpdate(
       req.params.id,
@@ -131,7 +131,7 @@ export const approveProduct = async (req: AuthenticatedRequest, res: Response): 
 // @desc    Reject a product (admin only)
 // @route   PATCH /api/products/:id/reject
 // @access  Private/Admin
-export const rejectProduct = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const rejectProduct = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const { reason } = req.body;
     
@@ -174,7 +174,7 @@ export const rejectProduct = async (req: AuthenticatedRequest, res: Response): P
 // @desc    Toggle product status (active/inactive)
 // @route   PATCH /api/products/:id/toggle-status
 // @access  Private/Admin
-export const toggleProductStatus = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const toggleProductStatus = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const product = await Product.findById(req.params.id);
     

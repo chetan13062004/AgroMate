@@ -69,9 +69,9 @@ router
     restrictTo('farmer'),
     upload.single('image'),
     productValidationRules,
-    (req: Request, res: Response, next: NextFunction) => {
+    (req: Request, res: Response) => {
       (req as AuthenticatedRequest).user = req.user!;
-      createProduct(req as AuthenticatedRequest, res as Response, next);
+      createProduct(req as AuthenticatedRequest, res as Response);
     }
   );
 
@@ -144,9 +144,9 @@ router.get(
   protect,
   ensureAuthenticated,
   restrictTo('farmer'),
-  (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response) => {
     (req as AuthenticatedRequest).user = req.user!;
-    getFarmerProducts(req as AuthenticatedRequest, res as Response, next);
+    getFarmerProducts(req as AuthenticatedRequest, res as Response);
   }
 );
 
@@ -164,27 +164,27 @@ router.patch(
 
 router
   .route('/:id')
-  .get((req: Request, res: Response, next: NextFunction) => {
+  .get((req: Request, res: Response) => {
     (req as AuthenticatedRequest).user = req.user!;
-    getProduct(req as AuthenticatedRequest, res as Response, next);
+    getProduct(req as AuthenticatedRequest, res as Response);
   })
   .patch(
     protect,
     ensureAuthenticated,
     restrictTo('farmer'),
     upload.single('image'),
-    (req: Request, res: Response, next: NextFunction) => {
+    (req: Request, res: Response) => {
       (req as AuthenticatedRequest).user = req.user!;
-      updateProduct(req as AuthenticatedRequest, res as Response, next);
+      updateProduct(req as AuthenticatedRequest, res as Response);
     }
   )
   .delete(
     protect,
     ensureAuthenticated,
     restrictTo('farmer'),
-    (req: Request, res: Response, next: NextFunction) => {
+    (req: Request, res: Response) => {
       (req as AuthenticatedRequest).user = req.user!;
-      deleteProduct(req as AuthenticatedRequest, res as Response, next);
+      deleteProduct(req as AuthenticatedRequest, res as Response);
     }
   );
 

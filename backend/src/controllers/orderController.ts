@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import Cart from '../models/cartModel';
 import Product from '../models/productModel';
 import Order from '../models/orderModel';
@@ -29,7 +29,7 @@ export const getMyOrders = async (req: Request, res: Response) => {
 // @desc    Get single order by id (buyer can access own order, farmer/admin can access related)
 // @route   GET /api/orders/:id
 // @access  Private
-export const getOrderById = async (req: Request, res: Response) => {
+export const getOrderById = async (req: Request, res: Response): Promise<Response | void> => {
   const userReq = req as AuthenticatedRequest
   try {
     const order = await Order.findById(req.params.id).populate('items.product user', '-password')
@@ -79,7 +79,7 @@ export const getFarmerOrders = async (req: Request, res: Response) => {
   }
 };
 
-export const checkout = async (req: Request, res: Response, next: NextFunction) => {
+export const checkout = async (req: Request, res: Response): Promise<Response | void> => {
   const userReq = req as AuthenticatedRequest;
   try {
     const cart = await Cart.findOne({ user: userReq.user._id }).populate('items.product');

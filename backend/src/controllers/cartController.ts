@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import Cart from '../models/cartModel';
 import Product from '../models/productModel';
 import { AuthenticatedRequest } from '../types/express';
@@ -7,7 +7,7 @@ import { calculateDeliveryFee } from '../utils/cartUtils';
 // @desc    Add product to cart (or increase quantity)
 // @route   POST /api/cart
 // @access  Private/Buyer
-export const addToCart = async (req: AuthenticatedRequest, res: Response) => {
+export const addToCart = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     if (!req.user) {
       return res.status(401).json({ message: 'Not authenticated' });
@@ -62,7 +62,7 @@ export const addToCart = async (req: AuthenticatedRequest, res: Response) => {
 // @desc    Get current user's cart
 // @route   GET /api/cart
 // @access  Private/Buyer
-export const getCart = async (req: AuthenticatedRequest, res: Response) => {
+export const getCart = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     if (!req.user) {
       return res.status(401).json({ message: 'Not authenticated' });
@@ -94,7 +94,7 @@ export const getCart = async (req: AuthenticatedRequest, res: Response) => {
 // @desc    Remove item from cart
 // @route   DELETE /api/cart/:productId
 // @access  Private/Buyer
-export const removeFromCart = async (req: AuthenticatedRequest, res: Response) => {
+export const removeFromCart = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const { productId } = req.params;
     if (!req.user) {

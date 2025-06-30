@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import Product from '../models/productModel';
 import { AuthenticatedRequest } from '../types/express';
 import { validationResult } from 'express-validator';
@@ -12,7 +12,7 @@ const unlink = promisify(fs.unlink);
 // @desc    Create a new product
 // @route   POST /api/products
 // @access  Private/Farmer
-export const createProduct = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const createProduct = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   // --- Detailed Debugging --- 
   console.log('--- Create Product Request Received ---');
   console.log('Request Body:', JSON.stringify(req.body, null, 2));
@@ -134,7 +134,7 @@ export const createProduct = async (req: AuthenticatedRequest, res: Response, ne
 // @desc    Get all products for the logged-in farmer
 // @route   GET /api/products/farmer
 // @access  Private/Farmer
-export const getFarmerProducts = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const getFarmerProducts = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const products = await Product.find({ farmer: req.user._id })
       .sort({ createdAt: -1 });
@@ -158,7 +158,7 @@ export const getFarmerProducts = async (req: AuthenticatedRequest, res: Response
 // @desc    Get a single product
 // @route   GET /api/products/:id
 // @access  Private
-export const getProduct = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const getProduct = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const product = await Product.findById(req.params.id);
 
@@ -191,7 +191,7 @@ export const getProduct = async (req: AuthenticatedRequest, res: Response, next:
 // @desc    Update a product (supports partial updates and optional new image)
 // @route   PATCH /api/products/:id
 // @access  Private/Farmer
-export const updateProduct = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const updateProduct = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const product = await Product.findById(req.params.id);
 
@@ -313,7 +313,7 @@ export const getActiveProducts = async (_req: Request, res: Response) => {
   }
 };
 
-export const deleteProduct = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+export const deleteProduct = async (req: AuthenticatedRequest, res: Response): Promise<Response | void> => {
   try {
     const product = await Product.findById(req.params.id);
 

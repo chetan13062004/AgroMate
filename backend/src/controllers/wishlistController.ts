@@ -1,6 +1,7 @@
 import { Response, NextFunction, RequestHandler } from 'express';
 import asyncHandler from 'express-async-handler';
 import Wishlist from '../models/wishlistModel.js';
+import { Types } from 'mongoose';
 import { AuthenticatedRequest } from '../types/express';
 
 // Create a type-safe async handler
@@ -81,7 +82,8 @@ export const removeFromWishlist = asyncHandlerWrapper(async (req, res) => {
     throw new Error('Wishlist not found');
   }
   
-  const productIndex = wishlist.products.indexOf(req.params.productId);
+const productIdObj = new Types.ObjectId(req.params.productId);
+const productIndex = wishlist.products.indexOf(productIdObj);
   
   if (productIndex > -1) {
     wishlist.products.splice(productIndex, 1);

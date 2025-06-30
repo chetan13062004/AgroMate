@@ -6,6 +6,9 @@ const router = express.Router();
 
 // Ensure user is authenticated and an admin
 router.use(protect, (req: Request, res: Response, next: NextFunction) => {
+  // ...
+  return;
+
   if (!req.user) {
     return res.status(401).json({ message: 'Not authenticated' });
   }

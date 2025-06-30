@@ -1,4 +1,4 @@
-import { Response, NextFunction, Request } from 'express';
+import { Response, Request } from 'express';
 import { handleFileUpload, handleMultipleFilesUpload, MulterRequest, UploadedFile, getFileUrl } from '../utils/upload';
 import { IUser } from '../models/userModel';
 import mongoose from 'mongoose';
@@ -70,7 +70,7 @@ const sendResponse = <T extends object>(
 export const uploadFile = async (
   req: Request & AuthenticatedRequest,
   res: Response<ApiResponse<{ file: FileResponse }>>,
-  next: NextFunction
+  
 ): Promise<void> => {
   // Type guard to check if user is authenticated
   if (!req.user) {
@@ -126,7 +126,7 @@ export const uploadFile = async (
 export const uploadMultipleFiles = async (
   req: Request & AuthenticatedRequest,
   res: Response<ApiResponse<{ files: FileResponse[] }>>,
-  next: NextFunction
+  
 ): Promise<void> => {
   // Type guard to check if user is authenticated
   if (!req.user) {
@@ -184,7 +184,7 @@ export const uploadMultipleFiles = async (
 export const deleteFile = async (
   req: Request & AuthenticatedRequest,
   res: Response<ApiResponse<Record<string, never>>>,
-  next: NextFunction
+  
 ): Promise<void> => {
   // Type guard to check if user is authenticated
   if (!req.user) {

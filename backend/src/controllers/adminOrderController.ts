@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Order from '../models/orderModel';
-import { AuthenticatedRequest } from '../types/express';
+
 
 // Utility to build a Mongo find object from query params
 function buildFilter(query: any) {

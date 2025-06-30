@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cookieParser from 'cookie-parser';
 
-import morgan from 'morgan';
+
 import path from 'path';
 import { globalErrorHandler } from './utils/errorHandler';
 import authRoutes from './routes/authRoutes';

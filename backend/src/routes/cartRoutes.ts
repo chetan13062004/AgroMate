@@ -9,9 +9,9 @@ router.use(protect, restrictTo('buyer'));
 
 router
   .route('/')
-  .get(getCart)   // GET /api/cart
-  .post(addToCart); // POST /api/cart
+  .get(getCart as import('express').RequestHandler)   // GET /api/cart
+  .post(addToCart as import('express').RequestHandler); // POST /api/cart
 
-router.delete('/:productId', removeFromCart); // DELETE /api/cart/:productId
+router.delete('/:productId', removeFromCart as import('express').RequestHandler); // DELETE /api/cart/:productId
 
 export default router;
