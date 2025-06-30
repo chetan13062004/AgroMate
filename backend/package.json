@@ -9,7 +9,8 @@
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npm install --save-dev @types/node"
   },
   "keywords": [
     "node",
